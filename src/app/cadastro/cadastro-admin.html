@@ -1,0 +1,46 @@
+<h1>Cadastro de Usuários</h1>
+
+@if (mensagem) {
+  <div class="alert alert-{{ tipoMensagem }} alert-dismissible fade show" role="alert">
+    {{ mensagem }}
+    <button type="button" class="btn-close" (click)="mensagem = ''" aria-label="Close"></button>
+  </div>
+}
+
+<form [formGroup]="formularioCadastro" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" />
+  </div>
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="name" formControlName="nome" />
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="password" formControlName="senha" />
+  </div>
+
+  <!-- CHECKBOX APENAS PARA ADMIN -->
+  <div class="mb-3">
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="admin"
+        formControlName="admin"
+        [value]="1"
+      />
+      <label class="form-check-label" for="admin">
+        <strong>Usuário Administrador</strong>
+      </label>
+    </div>
+    <small class="text-muted">Marque para dar privilégios de administrador</small>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!formularioCadastro.valid">
+    Cadastrar Usuário
+  </button>
+</form>
